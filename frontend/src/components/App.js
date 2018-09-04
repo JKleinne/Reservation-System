@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import logo from '../logo.svg';
 import '../stylesheets/App.css';
 
 class App extends Component {
+    /* Example of how to call the backend */
+
+    // async componentDidMount() {
+    //     try {
+    //         await axios.get('/users/');
+    //     } catch(error) {
+    //         console.error(error);
+    //     }
+    // }
+
   render() {
     return (
       <div className="App">
