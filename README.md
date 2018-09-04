@@ -8,4 +8,4 @@
 ##### Kyle Nancoo
 ##### Eliza Gaudio
 #
-##### Systems Development Project, Vanier College Booking System (Prototype)
+#### Systems Development Project, Vanier College Booking System (Prototype)
