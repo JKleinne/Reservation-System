@@ -3,5 +3,9 @@
 #
 ## Members
 ### Jonnie Klein Quezada
+### Kevin Hirsh
+### Elie Sader
+### Kyle Nancoo
+### Eliza Gaudio
 #
 ##### Systems Development Project, Vanier College Booking System (Prototype)
