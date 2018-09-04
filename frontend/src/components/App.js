@@ -10,7 +10,7 @@ class App extends Component {
     //     try {
     //         await axios.get('/users/');
     //     } catch(error) {
-    //         console.err(error);
+    //         console.error(error);
     //     }
     // }
 
