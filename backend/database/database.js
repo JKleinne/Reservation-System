@@ -48,7 +48,7 @@ async function queryTransaction(cmd, connection) {
         await connection.commit();
     } catch(error) {
         await connection.rollback();
-        console.err(error);
+        console.error(error);
     }
 }
 
