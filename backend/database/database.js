@@ -9,23 +9,26 @@ const pool = mysql.createPool({
     database: db.database
 });
 
-pool.getConnection((err, connection) => {
-    if(err) {
-        if(err.code === 'PROTOCOL_CONNECTION_LOST') {
-            console.error('Database connection was closed.');
-        }
+async function openConnection() {
+    try {
+        let connection = await pool.getConnection();
+        return connection;
+    } catch(error) {
+            if (error) {
+                if (error.code === 'PROTOCOL_CONNECTION_LOST') {
+                    console.error('Database connection was closed.');
+                }
 
-        if(err.code === 'ER_CON_COUNT_ERROR') {
-            console.error('Database has too many connections');
-        }
+                if (error.code === 'ER_CON_COUNT_ERROR') {
+                    console.error('Database has too many connections');
+                }
 
-        if(err.code === 'ECONNREFUSED') {
-            console.error('Database connection was refused');
-        }
+                if (error.code === 'ECONNREFUSED') {
+                    console.error('Database connection was refused');
+                }
+            }
     }
-
-    if(connection) connection.release();
-});
+}
 
 async function query(cmd) {
     await pool.connect();
@@ -55,5 +58,5 @@ async function queryTransaction(cmd, connection) {
 module.exports = {
     query,
     queryTransaction,
-    pool
+    openConnection
 };
