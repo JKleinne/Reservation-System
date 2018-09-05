@@ -29,5 +29,6 @@ async function getUserById(studentId) {
 }
 
 module.exports = {
-    addUser
+    addUser,
+    getUserById
 };
