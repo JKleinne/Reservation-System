@@ -58,6 +58,5 @@ async function queryTransaction(cmd, connection) {
 module.exports = {
     query,
     queryTransaction,
-    pool,
     openConnection
 };
