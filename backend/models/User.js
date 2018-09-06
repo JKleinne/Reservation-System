@@ -1,12 +1,9 @@
 const db = require('../database/database');
-const encrypt = require('../utilities/encryption');
 
 /*
  * Add operation so use queryTransaction
  */
 async function addUser(name, phone, email, studentId, username, password) {
-    const hashedPW = await encrypt.hash(password);
-
     const cmd = 'INSERT INTO User (...)';
 
     try {
