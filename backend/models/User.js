@@ -1,17 +1,22 @@
 const db = require('../database/database');
+const encrypt = require('../utilities/encryption');
 
 /*
  * Add operation so use queryTransaction
  */
-async function addUser(name, phone, email, studentId) {
+async function addUser(name, phone, email, studentId, username, password) {
+    const hashedPW = await encrypt.hash(password);
+
     const cmd = 'INSERT INTO User (...)';
 
     try {
         let connection = await db.openConnection();
         await db.queryTransaction(cmd, connection);
-        connection.release();
+        await connection.release();
     } catch(error) {
-        console.error(error);
+        throw {
+            message: error.message
+        }
     }
 }
 
@@ -24,11 +29,17 @@ async function getUserById(studentId) {
     try {
         return await db.query(cmd);
     } catch(error) {
-        console.error(error);
+        throw {
+            message: error.message
+        }
     }
 }
 
+//TODO returns user password based on username
+async function getUserByUsername(username) {}
+
 module.exports = {
     addUser,
-    getUserById
+    getUserById,
+    getUserByUsername
 };
