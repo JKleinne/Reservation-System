@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
 const User = require('../models/User');
+const encrypt = require('../utilities/encryption');
 const { isAuthenticated } = require('../middlewares/authentication');
 
 /*
@@ -43,10 +44,11 @@ passport.deserializeUser((id, done) => {
  */
 router.post('/signup', async (req, res) => {
     // Validate request before calling db
+    const hashedPW = encrypt.hash(req.body.password);
 
     // Call db to add new user
     try {
-        await User.addUser(req.body.name, req.body.phone, req.body.email, req.body.studentId);
+        await User.addUser(req.body.name, req.body.phone, req.body.email, req.body.studentId, req.body.username, hashedPW);
     } catch(error) {
         throw {
             message: error.message
