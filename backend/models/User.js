@@ -1,6 +1,6 @@
 const db = require('../database/database');
 
-/*
+/**
  * Add operation so use queryTransaction
  */
 async function addUser(name, phone, email, studentId, username, password) {
@@ -17,7 +17,7 @@ async function addUser(name, phone, email, studentId, username, password) {
     }
 }
 
-/*
+/**
  * Fetch operation so use query
  */
 async function getUserById(studentId) {

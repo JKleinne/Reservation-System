@@ -5,21 +5,29 @@ const passport = require('passport');
 const User = require('../models/User');
 const encrypt = require('../utilities/encryption');
 const { isAuthenticated } = require('../middlewares/authentication');
+const encrypt = require('../utilities/encryption');
 
 /*
- * Passport functionalities
+ * Passport functionality
  */
 passport.use(new LocalStrategy(
     async (username, password, done) => {
         try {
             let user = await User.getUserByUsername(username);
 
+            // If user with given username was not found, pass false
             if(!user) return done(null, false);
 
-            let isValid = await bcrypt.compare(password, user.password);
+            /*
+             * Compare the hashed password used for login and the hashed password
+             * already in the database, linked to the user
+             */
+            let isValid = await bcrypt.compare(await encrypt.hash(password), user.password);
 
+            // If they are not identical, pass false
             if(!isValid) return done(null, false);
 
+            // else pass the user object
             return done(null, user);
         } catch(error) {
             return done(error);

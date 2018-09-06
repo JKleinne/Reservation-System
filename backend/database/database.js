@@ -1,6 +1,10 @@
 const mysql = require('mysql');
 const db = require('../config/config').mysql;
 
+/**
+ * Creates a pool of connection
+ * @type {Pool}
+ */
 const pool = mysql.createPool({
     connectionLimit: 10,
     host: db.host,
@@ -9,6 +13,10 @@ const pool = mysql.createPool({
     database: db.database
 });
 
+/**
+ * Returns a connection from the pool
+ * @returns {Promise<void>}
+ */
 async function openConnection() {
     try {
         let connection = await pool.getConnection();
@@ -34,9 +42,12 @@ async function openConnection() {
     }
 }
 
+/**
+ * Query function, use only for fetch operations
+ * @param cmd SQL command
+ * @returns {Promise<void>}
+ */
 async function query(cmd) {
-    await pool.connect();
-
     try {
         let result = await pool.query(cmd);
         return result;
@@ -47,6 +58,12 @@ async function query(cmd) {
     }
 }
 
+/**
+ * Query function, use for any operations
+ * @param cmd SQL command
+ * @param connection A connection to the database
+ * @returns {Promise<void>}
+ */
 async function queryTransaction(cmd, connection) {
     try {
         await connection.beginTransaction();
