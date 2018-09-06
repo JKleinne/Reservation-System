@@ -14,19 +14,23 @@ async function openConnection() {
         let connection = await pool.getConnection();
         return connection;
     } catch(error) {
-            if (error) {
                 if (error.code === 'PROTOCOL_CONNECTION_LOST') {
-                    console.error('Database connection was closed.');
+                    throw {
+                        message: 'Database connection was closed.'
+                    }
                 }
 
                 if (error.code === 'ER_CON_COUNT_ERROR') {
-                    console.error('Database has too many connections');
+                    throw {
+                        message: 'Database has too many connections'
+                    }
                 }
 
                 if (error.code === 'ECONNREFUSED') {
-                    console.error('Database connection was refused');
+                    throw {
+                        message: 'Database has too many connections'
+                    }
                 }
-            }
     }
 }
 
@@ -34,13 +38,12 @@ async function query(cmd) {
     await pool.connect();
 
     try {
-        let {err, result, fields} = await pool.query(cmd);
-
-        if(err) throw err;
-
+        let result = await pool.query(cmd);
         return result;
     } catch(error) {
-        console.error(error);
+        throw {
+            message: error.message
+        }
     }
 }
 
@@ -51,7 +54,9 @@ async function queryTransaction(cmd, connection) {
         await connection.commit();
     } catch(error) {
         await connection.rollback();
-        console.error(error);
+        throw {
+            message: error.message
+        }
     }
 }
 
