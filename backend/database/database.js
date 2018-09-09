@@ -1,6 +1,10 @@
 const mysql = require('mysql');
 const db = require('../config/config').mysql;
 
+/**
+ * Creates a pool of connection
+ * @type {Pool}
+ */
 const pool = mysql.createPool({
     connectionLimit: 10,
     host: db.host,
@@ -9,41 +13,57 @@ const pool = mysql.createPool({
     database: db.database
 });
 
+/**
+ * Returns a connection from the pool
+ * @returns {Promise<void>}
+ */
 async function openConnection() {
     try {
         let connection = await pool.getConnection();
         return connection;
     } catch(error) {
-            if (error) {
                 if (error.code === 'PROTOCOL_CONNECTION_LOST') {
-                    console.error('Database connection was closed.');
+                    throw {
+                        message: 'Database connection was closed.'
+                    }
                 }
 
                 if (error.code === 'ER_CON_COUNT_ERROR') {
-                    console.error('Database has too many connections');
+                    throw {
+                        message: 'Database has too many connections'
+                    }
                 }
 
                 if (error.code === 'ECONNREFUSED') {
-                    console.error('Database connection was refused');
+                    throw {
+                        message: 'Database has too many connections'
+                    }
                 }
-            }
     }
 }
 
+/**
+ * Query function, use only for fetch operations
+ * @param cmd SQL command
+ * @returns {Promise<void>}
+ */
 async function query(cmd) {
-    await pool.connect();
-
     try {
-        let {err, result, fields} = await pool.query(cmd);
-
-        if(err) throw err;
-
+        let result = await pool.query(cmd);
         return result;
     } catch(error) {
-        console.error(error);
+        throw {
+            message: error.message
+        }
     }
 }
 
+/**
+ * Query function, use for any operations
+ * @param cmd SQL command
+ * @param connection A connection to the database
+ * @returns {Promise<void>}
+ */
 async function queryTransaction(cmd, connection) {
     try {
         await connection.beginTransaction();
@@ -51,7 +71,9 @@ async function queryTransaction(cmd, connection) {
         await connection.commit();
     } catch(error) {
         await connection.rollback();
-        console.error(error);
+        throw {
+            message: error.message
+        }
     }
 }
 
