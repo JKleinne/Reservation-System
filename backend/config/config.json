@@ -14,7 +14,7 @@
 		  password: db.password,
 		  database: db.database
 		}),
-		"result": await pool.query(cmd);
+	"result": await pool.query(cmd)
 	}
 	
 	"www": {
@@ -30,11 +30,6 @@
 			: 'port ' + addr.port
 	}
 	
-	"model": {
-	  "cmdadd": 'INSERT INTO User (...)',
-	  "cmdget": `SELECT * FROM User WHERE studentId = ${studentId}`
-	}
-	
 	"users": {
 	  "hashedPW": encrypt.hash(req.body.password)
 	}
@@ -43,7 +38,7 @@
 	  "saltRounds": 10
 	}
 	
-	"app": {
+	"appJS": {
 	  "app": express(),
 	}
 	  
