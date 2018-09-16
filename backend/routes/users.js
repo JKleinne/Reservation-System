@@ -52,7 +52,7 @@ passport.deserializeUser((id, done) => {
  */
 router.post('/signup', async (req, res) => {
     // Validate request before calling db
-    const hashedPW = encrypt.hash(req.body.password);
+    const hashedPW = require('../config/config').users.hashedPW;
 
     // Call db to add new user
     try {
