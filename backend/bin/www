@@ -12,14 +12,14 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = require('../config/config').www.port;
+var port = normalizePort(process.env.PORT || config.PORT);
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = require('../config/config').www.server;
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -34,7 +34,7 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-  var port = require('../config/config').www.portNorm;
+  var port = parseInt(val, config.www.RADIX);
 
   if (isNaN(port)) {
     // named pipe
@@ -58,7 +58,9 @@ function onError(error) {
     throw error;
   }
 
-  var bind = require('../config/config').www.bind;
+  var bind = typeof port === config.www.portType,
+            ? config.www.pipe + port
+		    : config.www.port + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -80,6 +82,8 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = require('../config/config').www.addr;
-  var bind = require('../config/config').www.bindListen;
+  var addr = server.address();
+  var bind =  typeof addr === config.www.portType,
+			? config.www.pipe + addr
+			: config.www.port + addr.port
 }

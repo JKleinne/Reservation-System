@@ -1,45 +1,26 @@
 {
-  "mysql": {
+  "mysql": 
+  {
     "host": "",
     "user": "",
     "password": "",
     "database": ""
   }
   
-  "data": {
-	"pool": mysql.createPool({
-		  connectionLimit: 10,
-		  host: db.host,
-		  user: db.user,
-		  password: db.password,
-		  database: db.database
-		}),
-	"result": await pool.query(cmd)
-	}
-	
-	"www": {
-	  "port": normalizePort(process.env.PORT || '3005'),
-	  "server": http.createServer(app),
-	  "portNorm": parseInt(val, 10),
-	  "bind": typeof port === 'string
-			? 'Pipe ' + port
-			: 'Port ' + port',
-	  "addr": server.address(),
-	  "bindListen": typeof addr === 'string'
-			? 'pipe ' + addr
-			: 'port ' + addr.port
-	}
-	
-	"users": {
-	  "hashedPW": encrypt.hash(req.body.password)
-	}
-	
-	"encryption": {
-	  "saltRounds": 10
-	}
-	
-	"appJS": {
-	  "app": express()
-	}
-	  
+  "cLimit": 10
+  
+  "PORT": '3005'
+  
+  "www": 
+  {
+	"RADIX": 10,
+	"portType": 'string',
+	"pipe": 'Pipe ',
+	"port": 'Port ',
+  }
+  
+  "encryption": 
+  {
+    "saltRounds": 10
+  }
 }
