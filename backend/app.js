@@ -6,7 +6,7 @@ const passport = require('passport');
 const session = require('express-session');
 const flash = require('flash');
 
-const app = require('../config/config').appJS.app;
+const app = express();
 
 // Express Session
 app.use(session({

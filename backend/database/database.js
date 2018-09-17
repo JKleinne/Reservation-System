@@ -5,7 +5,13 @@ const db = require('../config/config').mysql;
  * Creates a pool of connection
  * @type {Pool}
  */
-const pool = require('../config/config').data.pool;
+const pool = mysql.createPool({
+		  connectionLimit: require('../config/config').cLimit,
+		  host: db.host,
+		  user: db.user,
+		  password: db.password,
+		  database: db.database
+		});
 
 /**
  * Returns a connection from the pool
@@ -43,7 +49,7 @@ async function openConnection() {
  */
 async function query(cmd) {
     try {
-        let result = require('../config/config').data.result;
+        let result = await pool.query(cmd);
         return result;
     } catch(error) {
         throw {
