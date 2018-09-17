@@ -39,7 +39,7 @@
 	}
 	
 	"appJS": {
-	  "app": express(),
+	  "app": express()
 	}
 	  
 }
