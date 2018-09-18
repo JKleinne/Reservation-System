@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const saltRounds = require('../config/config').encryption.saltRounds;
 
 /*
  * Hashes the given string and then returns it
