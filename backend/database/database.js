@@ -6,12 +6,12 @@ const db = require('../config/config').mysql;
  * @type {Pool}
  */
 const pool = mysql.createPool({
-    connectionLimit: 10,
-    host: db.host,
-    user: db.user,
-    password: db.password,
-    database: db.database
-});
+		  connectionLimit: require('../config/config').cLimit,
+		  host: db.host,
+		  user: db.user,
+		  password: db.password,
+		  database: db.database
+		});
 
 /**
  * Returns a connection from the pool
