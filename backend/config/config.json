@@ -5,20 +5,16 @@
     "user": "",
     "password": "",
     "database": ""
-  }
-  
-  "cLimit": 10
-  
-  "PORT": '3005'
-  
+  },
+  "cLimit": 10,
+  "PORT": "3005",
   "www": 
   {
 	"RADIX": 10,
-	"portType": 'string',
-	"pipe": 'Pipe ',
-	"port": 'Port ',
-  }
-  
+	"portType": "string",
+	"pipe": "Pipe",
+	"port": "Port",
+  },
   "encryption": 
   {
     "saltRounds": 10
