@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import logo from '../logo.svg';
 import '../stylesheets/App.css';
-import Login from './Login';
 
 class App extends Component {
     /* Example of how to call the backend */
@@ -25,8 +24,6 @@ class App extends Component {
         <p className="App-intro">
           <code>Hello There</code>
         </p>
-
-        <Login/>
       </div>
     );
   }
