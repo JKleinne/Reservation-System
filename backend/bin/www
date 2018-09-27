@@ -58,7 +58,7 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === config.www.portType,
+  var bind = typeof port === config.www.portType
             ? config.www.pipe + port
 		    : config.www.port + port;
 
@@ -83,7 +83,7 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
-  var bind =  typeof addr === config.www.portType,
+  var bind =  typeof addr === config.www.portType
 			? config.www.pipe + addr
 			: config.www.port + addr.port
 }
