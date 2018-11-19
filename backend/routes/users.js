@@ -5,7 +5,6 @@ const passport = require('passport');
 const User = require('../models/User');
 const encrypt = require('../utilities/encryption');
 const { isAuthenticated } = require('../middlewares/authentication');
-const encrypt = require('../utilities/encryption');
 
 /*
  * Passport functionality
