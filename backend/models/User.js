@@ -3,8 +3,8 @@ const db = require('../database/database');
 /**
  * Add operation so use queryTransaction
  */
-async function addUser(name, phone, email, studentId, username, password) {
-    const cmd = 'INSERT INTO User (...)';
+async function addStudent(studentID, name, email, password, courseID, notes, permission) {
+    const cmd = 'INSERT INTO User (studentID, name, email, password, courseID, notes, permission)';
 
     try {
         let connection = await db.openConnection();
@@ -31,6 +31,37 @@ async function getUserById(studentId) {
         }
     }
 }
+
+/**
+* Delete operation for booking
+*/
+async function deleteBookingById(bookingID){
+	const cmd = 'DELETE FROM Bookings WHERE bookingID = ${bookingID}';
+	
+	try {
+		return await db.query(cmd);
+	} catch(error) {
+		throw{
+			message: error.message
+		}
+	}
+}
+
+/**
+* Add operation for group
+*/
+async function addGroup(groupName, memberIDs){
+	const cmd = 'INSERT INTO Group(groupName, memberIDs)';
+	
+	try {
+		return await db.query(cmd);
+	} catch(error) {
+		throw{
+			message: error.message
+		}
+	}
+}
+
 
 //TODO returns user password based on username
 async function getUserByUsername(username) {}
