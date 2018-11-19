@@ -19,7 +19,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -43,7 +42,7 @@ app.use(function(error, req, res, next) {
 
   // render the error page
   res.status(error.status || 500);
-  res.render(error.message);
+  res.json({error: error.message});
 });
 
 module.exports = app;

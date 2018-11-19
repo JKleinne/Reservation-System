@@ -2,7 +2,7 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
-const User = require('../models/User');
+const Student = require('../models/Student');
 const encrypt = require('../utilities/encryption');
 const { isAuthenticated } = require('../middlewares/authentication');
 
@@ -10,9 +10,12 @@ const { isAuthenticated } = require('../middlewares/authentication');
  * Passport functionality
  */
 passport.use(new LocalStrategy(
-    async (username, password, done) => {
+    async (id, password, done) => {
         try {
-            let user = await User.getUserByUsername(username);
+            //let user = await Student.getStudentById(id);
+            let user = {password: "stuff"};
+
+            console.log(`Password: ${password}`);
 
             // If user with given username was not found, pass false
             if(!user) return done(null, false);
@@ -51,11 +54,13 @@ passport.deserializeUser((id, done) => {
  */
 router.post('/signup', async (req, res) => {
     // Validate request before calling db
+    console.log(req);
     const hashedPW = encrypt.hash(req.body.password);
 
     // Call db to add new user
     try {
-        await User.addUser(req.body.name, req.body.phone, req.body.email, req.body.studentId, req.body.username, hashedPW);
+        //TODO Student.addStudent
+        res.send({});
     } catch(error) {
         throw {
             message: error.message

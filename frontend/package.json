@@ -6,13 +6,17 @@
   "dependencies": {
     "axios": "^0.18.0",
     "history": "^4.7.2",
+    "radium": "^0.25.0",
     "react": "^16.4.2",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.4.2",
-    "react-scripts": "1.1.5"
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.5",
+    "lodash": "latest"
   },
   "scripts": {
     "start": "concurrently \"node ../backend/bin/www\" \"react-scripts start\"",
+    "frontendStart": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
