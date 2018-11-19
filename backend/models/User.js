@@ -67,7 +67,9 @@ async function addGroup(groupName, memberIDs){
 async function getUserByUsername(username) {}
 
 module.exports = {
-    addUser,
+    addStudent,
     getUserById,
-    getUserByUsername
+    getUserByUsername,
+    deleteBookingById,
+    addGroup
 };

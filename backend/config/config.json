@@ -1,6 +1,5 @@
 {
-  "mysql": 
-  {
+  "mysql": {
     "host": "",
     "user": "",
     "password": "",
@@ -8,15 +7,13 @@
   },
   "cLimit": 10,
   "PORT": "3005",
-  "www": 
-  {
+  "www": {
 	"RADIX": 10,
 	"portType": "string",
 	"pipe": "Pipe",
-	"port": "Port",
+	"port": "Port"
   },
-  "encryption": 
-  {
+  "encryption": {
     "saltRounds": 10
   }
 }
