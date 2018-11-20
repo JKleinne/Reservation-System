@@ -1,9 +1,9 @@
 {
   "mysql": {
-    "host": "",
-    "user": "",
-    "password": "",
-    "database": ""
+    "host": "localhost",
+    "user": "root",
+    "password": "password",
+    "database": "sys"
   },
   "cLimit": 10,
   "PORT": "3005",
