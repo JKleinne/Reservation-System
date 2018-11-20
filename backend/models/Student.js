@@ -20,7 +20,7 @@ async function addStudent(studentID, name, email, password, courseID, notes, per
 /**
  * Fetch operation so use query
  */
-async function getUserById(studentId) {
+async function getStudentById(studentId) {
     const cmd = `SELECT * FROM User WHERE studentId = ${studentId}`;
 
     try {
@@ -64,12 +64,12 @@ async function addGroup(groupName, memberIDs){
 
 
 //TODO returns user password based on username
-async function getUserByUsername(username) {}
+async function getStudentByUsername(username) {}
 
 module.exports = {
     addStudent,
-    getUserById,
-    getUserByUsername,
+    getStudentById,
+    getStudentByUsername,
     deleteBookingById,
     addGroup
 };
