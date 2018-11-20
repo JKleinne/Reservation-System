@@ -3,13 +3,12 @@ const db = require('../database/database');
 /**
  * Add operation so use queryTransaction
  */
-async function addStudent(studentID, name, email, password, courseID, notes, permission) {
-    const cmd = 'INSERT INTO User (studentID, name, email, password, courseID, notes, permission)';
+async function addStudent(studentID, password, name, courseID) {
+    const cmd = `INSERT INTO Student (studentId, name, password, courseId)
+                 VALUES ("${studentID}", "${name}", "${password}", ${courseID ? courseID : 0})`;
 
     try {
-        let connection = await db.openConnection();
-        await db.queryTransaction(cmd, connection);
-        await connection.release();
+        await db.query(cmd);
     } catch(error) {
         throw {
             message: error.message
@@ -21,10 +20,11 @@ async function addStudent(studentID, name, email, password, courseID, notes, per
  * Fetch operation so use query
  */
 async function getStudentById(studentId) {
-    const cmd = `SELECT * FROM User WHERE studentId = ${studentId}`;
+    const cmd = `SELECT * FROM Student WHERE studentId = "${studentId}"`;
 
     try {
-        return await db.query(cmd);
+        let result = await db.query(cmd);
+        return result;
     } catch(error) {
         throw {
             message: error.message

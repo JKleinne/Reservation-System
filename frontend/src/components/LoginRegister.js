@@ -19,7 +19,7 @@ const visible = {
 const hidden = {
     display: 'none'
 };
-
+//TODO Populate Selection List
 class LoginRegister extends Component {
     constructor(props) {
         super(props);
@@ -34,36 +34,41 @@ class LoginRegister extends Component {
                 id: '',
                 password: '',
                 confirmPassword: '',
-                email: '',
-                firstName: '',
-                lastName: '',
+                fullName: '',
+                courseId: '',
                 confirmPasswordValid: true
             }
         }
     }
 
-    async validateForm() {
-        let fName = _.toLower(this.state.signup.firstName);
-        let lName = _.toLower(this.state.signup.lastName);
+    async validateForm(evt) {
+        evt.preventDefault();
 
         //Compare if passwords match
         if(_.isEqual(this.state.signup.password, this.state.signup.confirmPassword)) {
-            await this.setState({signup: {confirmPasswordValid: true}});
+            await this.setState({
+                ...this.state,
+                signup: {
+                    ...this.state.signup,
+                    confirmPasswordValid: true
+                }
+            });
 
-            if(!this.state.registerClicked)
-                await axios.post("/users/login", {
-                    id: this.state.signup.id,
-                    password: this.state.signup.password
-                });
-            else
-                //TODO signup payload
-                await axios.post("/users/signup", {
-                    id: this.state.signup.id,
-                    password: this.state.signup.password
-                });
+            if(!this.state.registerClicked) {
+                await axios.post("/users/login", { ...this.state.login });
+            }
+            else {
+                await axios.post("/users/signup", { ...this.state.signup });
+            }
         }
         else {
-            this.setState({signup: {confirmPasswordValid: false}})
+            this.setState({
+                ...this.state,
+                signup: {
+                    ...this.state.signup,
+                    confirmPasswordValid: false
+                }
+            })
         }
     }
 
@@ -72,6 +77,10 @@ class LoginRegister extends Component {
     }
 
   render() {
+        const handleRegisterClick = () => {
+            this.toggleRegister();
+        };
+
     return (
         <div className="materialContainer">
             <div className="box" style={this.state.registerClicked ? containerStyle : {}}>
@@ -83,34 +92,82 @@ class LoginRegister extends Component {
                     }}}/>
                     : ""
                 }
+
                 <div className="title" style={this.state.registerClicked ? textWhite : {}}>
                     {this.state.registerClicked ? "REGISTER" : "LOGIN"}
                     </div>
 
                 <div className="input">
                     <input type="text" style={this.state.registerClicked ? textWhite : {}}
-                           placeholder="Username" name="name" id="name" onChange={evt => {
+                           placeholder="Student Id" name="studentId" id="studentId" onChange={evt => {
                                if(this.state.registerClicked)
-                                   this.setState({signup: {id: evt.target.value}});
+                                   this.setState({
+                                       ...this.state,
+                                       signup: {
+                                           ...this.state.signup,
+                                           id: evt.target.value
+                                       }
+                                   });
                                else
-                                   this.setState({login: {id: evt.target.value}});
+                                   this.setState({
+                                       ...this.state,
+                                       login: {
+                                           ...this.state.login,
+                                           id: evt.target.value
+                                       }
+                                   });
                     }}/>
                 </div>
 
                 <div className="input" style={this.state.registerClicked ? visible : hidden}>
-                    <input type="email" style={this.state.registerClicked ? textWhite : {}}
-                           placeholder="Email" name="email" id="email" onChange={evt => {
-                        this.setState({signup: {email: evt.target.value}});
+                    <input type="text" style={this.state.registerClicked ? textWhite : {}}
+                           placeholder="Full Name" name="fullName" id="fullName" onChange={evt => {
+                        this.setState({
+                            ...this.state,
+                            signup: {
+                                ...this.state.signup,
+                                fullName: evt.target.value
+                            }
+                        });
                     }}/>
                 </div>
 
                 <div className="input" style={this.state.registerClicked ? visible : hidden}>
+                    <label style={{color: 'white'}}>Course: </label>
+                    <select style={this.state.registerClicked ? {float: 'right'} : {}}
+                           name="course" id="course" onChange={evt => {
+                        this.setState({
+                            ...this.state,
+                            signup: {
+                                ...this.state.signup,
+                                courseId: evt.target.value
+                            }
+                        });
+                    }}>
+                        <option value="0">Computer Science Technology</option>
+                        <option value="1">Computer Science And Mathematics</option>
+                    </select>
+                </div>
+
+                <div className="input">
                     <input type="password" style={this.state.registerClicked ? textWhite : {}}
                            placeholder="Password" name="pass" id="pass" onChange={evt => {
                                if(this.state.registerClicked)
-                                   this.setState({signup: {password: evt.target.value}});
+                                   this.setState({
+                                       ...this.state,
+                                       signup: {
+                                           ...this.state.signup,
+                                           password: evt.target.value
+                                       }
+                                   });
                                else
-                                   this.setState({login: {password: evt.target.value}});
+                                   this.setState({
+                                       ...this.state,
+                                       login: {
+                                           ...this.state.login,
+                                           password: evt.target.value
+                                       }
+                                   });
                     }}/>
                     { !this.state.signup.confirmPasswordValid ?
                         <p style={{color: 'white'}}>
@@ -118,10 +175,16 @@ class LoginRegister extends Component {
                         </p> : ""}
                 </div>
 
-                <div className="input">
+                <div className="input" style={this.state.registerClicked ? visible : hidden}>
                     <input type="password" style={this.state.registerClicked ? textWhite : {}}
                            placeholder="Confirm Password" name="repass" id="repass" onChange={evt => {
-                        this.setState({login: {password: evt.target.value}});
+                        this.setState({
+                            ...this.state,
+                            signup: {
+                                ...this.state.signup,
+                                confirmPassword: evt.target.value
+                            }
+                        })
                     }}/>
                     { !this.state.signup.confirmPasswordValid ?
                         <p style={{color: 'white'}}>
@@ -130,8 +193,8 @@ class LoginRegister extends Component {
                 </div>
 
                 <div className="button login">
-                    <button className={""} onClick={async () => {
-                        await this.validateForm()
+                    <button className={""} onClick={async evt => {
+                        await this.validateForm(evt)
                     }}>
                         <span className="btn" style={this.state.registerClicked ? textWhite : {}}>Go</span>
                         <i className="fa fa-check"></i>
@@ -143,9 +206,7 @@ class LoginRegister extends Component {
             </div>
 
             <div className="overbox">
-                <div className="material-button alt-2"><span className="shape" onClick={() => {
-                    this.toggleRegister()
-                }}>
+                <div className="material-button alt-2"><span className="shape" onClick={handleRegisterClick}>
                 </span></div>
     </div>
 
