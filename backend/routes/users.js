@@ -56,7 +56,6 @@ router.post('/signup', async (req, res) => {
     try {
         await Student.addStudent(req.body.id, hashedPW, req.body.fullName,
                                     req.body.courseId);
-        let result = await Student.getStudentById("1640380");
         res.send( result[0] );
     } catch(error) {
         console.error(error.message + error.stack);
