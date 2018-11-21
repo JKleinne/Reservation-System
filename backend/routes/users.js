@@ -9,13 +9,10 @@ const { isAuthenticated } = require('../middlewares/authentication');
 /*
  * Passport functionality
  */
-passport.use(new LocalStrategy(
+passport.use('local-login', new LocalStrategy(
     async (id, password, done) => {
         try {
-            //let user = await Student.getStudentById(id);
-            let user = {password: "stuff"};
-
-            console.log(`Password: ${password}`);
+            let user = await Student.getStudentById(id);
 
             // If user with given username was not found, pass false
             if(!user) return done(null, false);
@@ -42,7 +39,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-    User.getUserById(id)
+    Student.getStudentById(id)
         .then((err, user) => {
         done(err, user);
     });
@@ -53,23 +50,20 @@ passport.deserializeUser((id, done) => {
  * Routes
  */
 router.post('/signup', async (req, res) => {
-    // Validate request before calling db
-    console.log(req);
-    const hashedPW = encrypt.hash(req.body.password);
+    const hashedPW = await encrypt.hash(req.body.password);
 
     // Call db to add new user
     try {
-        //TODO Student.addStudent
-        res.send({});
+        await Student.addStudent(req.body.id, hashedPW, req.body.fullName,
+                                    req.body.courseId);
+        res.send( result[0] );
     } catch(error) {
-        throw {
-            message: error.message
-        }
+        console.error(error.message + error.stack);
     }
 });
 
 //TODO redirection -> User homepage
-router.post('/login', passport.authenticate('local',
+router.post('/login', passport.authenticate('local-login',
     {successRedirect: '/', failureRedirect: '/users/login', failureFlash: true }),
         (req, res) => {
         res.redirect('/home');
