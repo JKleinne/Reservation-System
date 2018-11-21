@@ -3,7 +3,7 @@
     top: 0;
     opacity: 1;
     float: left;
-    padding: 60px 50px 40px 50px;
+    padding: 20% 50px 40px 50px;
     width: 100%;
     background: #fff;
     border-radius: 10px;
@@ -117,6 +117,7 @@
     height: 60px;
     top: 10px;
     border: none;
+    margin-top: 0;
     background: transparent;
 }
 
@@ -461,13 +462,13 @@ a {
     border-radius: 50%;
 }
 .btn::before {
-    background-color: #c92918;
+    background-color: slategrey;
     top: -0.75rem;
     left: 0.5rem;
     animation: top 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.25s infinite alternate;
 }
 .btn::after {
-    background-color: #e74c3c;
+    background-color: #c92918;
     top: 3rem;
     left: 13rem;
     animation: bottom 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s infinite alternate;
@@ -488,4 +489,18 @@ a {
 .btn:hover::before {
     top: 0.5rem;
     left: 0.35rem;
+}
+
+/*
+ * SELECT STYLES
+ */
+
+select {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    font-size: 16px;
+    color: #ED2553;
+    width: 220px;
+    height: 60px;
 }
