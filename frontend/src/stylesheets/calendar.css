@@ -61,8 +61,7 @@ header #logo .icon {
 
 main {
   display: block;
-  margin: 0 auto;
-  margin-top: 5em;
+  margin: 5em auto 0;
   max-width: 50em;
 }
 

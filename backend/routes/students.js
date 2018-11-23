@@ -15,6 +15,7 @@ router.post('/signup', async (req, res) => {
         res.send({user: await Student.getStudentById(req.body.id)});
     } catch(error) {
         console.error(error.message + error.stack);
+        res.status(400).send({error: 'Unable to signup'})
     }
 });
 
@@ -50,9 +51,8 @@ router.get('/getUser/:studentId', async (req, res) => {
         res.status(200).send({ user });
     } catch(error) {
         console.error(error);
+        res.status(400).send({ error: 'User not found' });
     }
-
-    res.status(400).send({ error: 'User not found' });
 });
 
 module.exports = router;
