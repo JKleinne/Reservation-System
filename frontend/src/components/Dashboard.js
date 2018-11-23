@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import logo from '../logo.svg';
-import '../stylesheets/login-signup.css';
+import Calendar from './Calendar';
 
 class Dashboard extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    async componentDidMount() {
+        let response = await axios.get(`/users/getUser/${this.props.match.params.studentId}`);
+        this.setState({ user: response.data.user });
+    }
+
     render() {
         return (
-           <div>
-
-           </div>
+            <div className="calendarContainer">
+              <Calendar />
+            </div>
         );
     }
 }
