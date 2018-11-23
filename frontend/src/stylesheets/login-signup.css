@@ -368,6 +368,7 @@ body {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     min-height: 100vh;
     font-family: 'Roboto', sans-serif;
 }
@@ -407,6 +408,7 @@ html {
 }
 body, html {
     height: 100%;
+    overflow-y: scroll;
 }
 body {
     font-family: "Lato", sans-serif;

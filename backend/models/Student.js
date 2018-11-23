@@ -24,7 +24,7 @@ async function getStudentById(studentId) {
 
     try {
         let result = await db.query(cmd);
-        return result;
+        return result[0];
     } catch(error) {
         throw {
             message: error.message
