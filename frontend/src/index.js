@@ -1,18 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
-import './stylesheets/index.css';
+import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
+//import './stylesheets/index.css';
 import registerServiceWorker from './registerServiceWorker';
 
 import LoginRegister from './components/LoginRegister';
 import Dashboard from './components/Dashboard';
+import Analytics from './components/Analytics';
 
 const routing = (
     <Router>
-        <div>
+        <Switch>
             <Route exact path="/" component={LoginRegister} />
-            <Route path="/home" component={Dashboard} />
-        </div>
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/analytics" component={Analytics} />
+        </Switch>
     </Router>
 );
 
