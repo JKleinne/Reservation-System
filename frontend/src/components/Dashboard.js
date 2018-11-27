@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import _ from 'lodash';
 import Calendar from './Calendar';
 import '../stylesheets/navigation.css'
 import Navigation from './Navigation';

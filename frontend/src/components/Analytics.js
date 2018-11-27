@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import Navigation from "./Navigation";
 import '../stylesheets/navigation.css';
 import { Bar, Pie } from 'react-chartjs-2';
@@ -7,16 +6,6 @@ import moment from 'moment';
 import axios from 'axios';
 import _ from 'lodash';
 import randomColor from 'randomcolor';
-
-const data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [{
-        label: "My First dataset",
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [0, 10, 5, 2, 20, 30, 45],
-    }]
-};
 
 class Analytics extends Component {
     constructor(props) {
