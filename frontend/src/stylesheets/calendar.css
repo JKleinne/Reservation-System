@@ -39,6 +39,10 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 
 header {
   display: block;
@@ -69,8 +73,9 @@ main {
 /* GRID */
 
 .calendarContainer {
-  width: 100%;
-  max-width: 700px;
+  overflow-y: scroll;
+  width: 45%;
+  max-width: 750px;
   position: absolute;
   background-color: white;
   top: 50%;
