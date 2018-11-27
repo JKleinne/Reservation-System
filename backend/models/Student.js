@@ -32,7 +32,25 @@ async function getStudentById(studentId) {
     }
 }
 
+async function getStudentCountPerCourse() {
+    const cmd = `SELECT COUNT(s.courseId) AS Count, c.description AS Description
+                 FROM sys.Student s
+                 LEFT JOIN sys.Course c
+                 ON s.courseId = c.courseId
+                 GROUP BY s.courseId;`;
+
+    try {
+        let result = await db.query(cmd);
+        return result;
+    } catch(error) {
+        throw {
+            message: error.message
+        }
+    }
+}
+
 module.exports = {
     addStudent,
-    getStudentById
+    getStudentById,
+    getStudentCountPerCourse
 };

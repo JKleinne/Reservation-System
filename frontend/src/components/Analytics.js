@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Navigation from "./Navigation";
 import '../stylesheets/navigation.css';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Pie } from 'react-chartjs-2';
 import moment from 'moment';
 import axios from 'axios';
+import _ from 'lodash';
+import randomColor from 'randomcolor';
 
 const data = {
     labels: ["January", "February", "March", "April", "May", "June", "July"],
@@ -24,12 +26,18 @@ class Analytics extends Component {
 
         this.generateLabels.bind(this);
         this.generateData.bind(this);
+        this.generateDemographicsLabels.bind(this);
+        this.generateDemographicsData.bind(this);
+        this.generateRandomColors.bind(this);
     }
 
     async componentDidMount() {
         this.setState({
             labels: this.generateLabels(),
-            data: await this.generateData()
+            data: await this.generateData(),
+            demoLabels: await this.generateDemographicsLabels(),
+            demoData: await this.generateDemographicsData(),
+            demoColors: await this.generateRandomColors()
         });
     }
 
@@ -43,6 +51,13 @@ class Analytics extends Component {
         return labels;
     }
 
+    async generateDemographicsLabels() {
+        let courses = await axios.get('/users/getCourseDemographics');
+        courses = courses.data.demographics;
+
+       return _.map(courses, course => course.Description);
+    }
+
     async generateData() {
         let logins = [];
 
@@ -51,9 +66,26 @@ class Analytics extends Component {
             logins.push(result.data.logins[0].Count);
         }
 
-        console.log(logins);
-
         return logins;
+    }
+
+    async generateDemographicsData() {
+        let courses = await axios.get('/users/getCourseDemographics');
+        courses = courses.data.demographics;
+
+        return _.map(courses, course => course.Count);
+    }
+
+    async generateRandomColors() {
+        let colors = [];
+
+        let courses = await axios.get('/users/getCourseDemographics');
+        courses = courses.data.demographics;
+
+        for(let i = 0; i < courses.length; i++)
+            colors.push(randomColor());
+
+        return colors;
     }
 
     render() {
@@ -83,6 +115,23 @@ class Analytics extends Component {
                         }
                     }
                     }/>
+                    <div></div>
+
+                    <Pie data={{
+                        labels: this.state.demoLabels,
+                        datasets: [{
+                            label: "Course Demographics",
+                            backgroundColor: this.state.demoColors,
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: this.state.demoData
+                        }],
+                        options: {
+                            title: {
+                                display: true,
+                                text: 'Course Demographics'
+                            }
+                        }
+                    }}/>
                 </div>
             </div>
         )

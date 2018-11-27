@@ -505,6 +505,7 @@ select {
     color: #ED2553;
     width: 220px;
     height: 60px;
+    padding: 5px 10px;
 }
 
 .analyticsContainer {

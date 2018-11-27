@@ -162,7 +162,16 @@ class LoginRegister extends Component {
                       <div className="input" style={this.state.registerClicked ? visible : hidden}>
                           <label style={{color: 'white'}}>Course: </label>
                           <select style={this.state.registerClicked ? {float: 'right'} : {}}
-                                  name="course" id="course" onChange={evt => {
+                                  name="course" id="course" onLoad={evt => {
+                              this.setState({
+                                  ...this.state,
+                                  signup: {
+                                      ...this.state.signup,
+                                      courseId: "0"
+                                  }
+                              });
+                          }}
+                                  onChange={evt => {
                               this.setState({
                                   ...this.state,
                                   signup: {
@@ -173,6 +182,9 @@ class LoginRegister extends Component {
                           }}>
                               <option value="0">Computer Science Technology</option>
                               <option value="1">Computer Science And Mathematics</option>
+                              <option value="2">Social Science</option>
+                              <option value="3">Pure and Applied Science</option>
+                              <option value="4">Commerce</option>
                           </select>
                       </div>
 
@@ -249,30 +261,3 @@ class LoginRegister extends Component {
 }
 
 export default LoginRegister;
-
-/*
-Homer Simpson approves of this code
-▓▓▓▓
-▒▒▒▓▓
-▒▒▒▒▒▓
-▒▒▒▒▒▒▓
-▒▒▒▒▒▒▓
-▒▒▒▒▒▒▒▓
-▒▒▒▒▒▒▒▓▓▓
-▒▓▓▓▓▓▓░░░▓
-▒▓░░░░▓░░░░▓
-▓░░░░░░▓░▓░▓
-▓░░░░░░▓░░░▓
-▓░░▓░░░▓▓▓▓
-▒▓░░░░▓▒▒▒▒▓
-▒▒▓▓▓▓▒▒▒▒▒▓
-▒▒▒▒▒▒▒▒▓▓▓▓
-▒▒▒▒▒▓▓▓▒▒▒▒▓
-▒▒▒▒▓▒▒▒▒▒▒▒▒▓
-▒▒▒▓▒▒▒▒▒▒▒▒▒▓
-▒▒▓▒▒▒▒▒▒▒▒▒▒▒▓
-▒▓▒▓▒▒▒▒▒▒▒▒▒▓
-▒▓▒▓▓▓▓▓▓▓▓▓▓
-▒▓▒▒▒▒▒▒▒▓
-▒▒▓▒▒▒▒▒▓
- */
