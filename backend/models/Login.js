@@ -31,7 +31,6 @@ async function getLoginsByDate(date) {
 
     try {
         let result = await db.query(cmd);
-        console.log(`Result: ${result}`);
         return result;
     } catch(error) {
         throw {
