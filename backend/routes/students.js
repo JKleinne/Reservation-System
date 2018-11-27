@@ -1,7 +1,12 @@
 const router = require('express').Router();
+
 const bcrypt = require('bcrypt');
-const Student = require('../models/Student');
+const moment = require('moment');
+
 const encrypt = require('../utilities/encryption');
+
+const Login = require('../models/Login');
+const Student = require('../models/Student');
 
 /*
  * Routes
@@ -35,6 +40,8 @@ router.post('/login', async (req, res) => {
         res.status(401).send({error: "Incorrect password"});
     }
     else {
+        await Login.addLogin(moment().format('YYYY-MM-DD hh:mm:ss'), studentId);
+
         res.status(200).send({
             user,
             isLogged: true
@@ -47,11 +54,20 @@ router.post('/login', async (req, res) => {
 router.get('/getUser/:studentId', async (req, res) => {
     try {
         let user = await Student.getStudentById(req.params.studentId);
-
         res.status(200).send({ user });
     } catch(error) {
         console.error(error);
         res.status(400).send({ error: 'User not found' });
+    }
+});
+
+router.post('/getLoginsByDate/:date', async (req, res) => {
+    try {
+        let logins = await Login.getLoginsByDate(req.params.date);
+        res.status(200).send({ logins });
+    } catch(error) {
+        console.error(error);
+        res.status(400).send({ error: 'Unable to fetch logins' });
     }
 });
 

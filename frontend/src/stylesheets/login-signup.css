@@ -506,3 +506,7 @@ select {
     width: 220px;
     height: 60px;
 }
+
+.analyticsContainer {
+    background-color: white;
+}
