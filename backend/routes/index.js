@@ -3,5 +3,6 @@
  * @param app
  */
 module.exports = (app) => {
-  app.use('/users', require('./students'))
+  app.use('/users', require('./students'));
+  app.use('/bookings', require('./bookings'));
 };

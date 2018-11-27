@@ -1,12 +1,29 @@
 import React from "react";
 import dateFns from "date-fns";
 import '../stylesheets/calendar.css';
+import axios from 'axios';
+import _ from 'lodash';
+import moment from 'moment';
 
 class Calendar extends React.Component {
-    state = {
-        currentMonth: new Date(),
-        selectedDate: new Date()
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            currentMonth: new Date(),
+            selectedDate: new Date()
+        };
+    }
+
+    async componentWillMount() {
+        const monthlyBookings = await axios.post(`/bookings/getBookingsByMonth/${moment(this.state.currentMonth).month() + 1}`);
+        this.setState({ monthlyBookings: monthlyBookings.data.bookings });
+    }
+
+    async componentWillUpdate() {
+        const monthlyBookings = await axios.post(`/bookings/getBookingsByMonth/${moment(this.state.currentMonth).month() + 1}`);
+        this.setState({ monthlyBookings: monthlyBookings.data.bookings });
+    }
 
     renderHeader() {
         const dateFormat = "MMMM YYYY";
@@ -59,6 +76,13 @@ class Calendar extends React.Component {
         let day = startDate;
         let formattedDate = "";
 
+        let bookedDays = [];
+
+        if(this.state.monthlyBookings) {
+            _.forEach(this.state.monthlyBookings, booking => bookedDays.push(new Date(booking.date).getDate()))
+        }
+
+
         while (day <= endDate) {
             for (let i = 0; i < 7; i++) {
                 formattedDate = dateFns.format(day, dateFormat);
@@ -73,6 +97,14 @@ class Calendar extends React.Component {
                         key={day}
                         onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
                     >
+                        {
+                            bookedDays.includes(new Date(day).getDate()) ?
+                                _.map(this.findBookingByDay(new Date(day).getDate()), booking => {
+                                    return <span className="booking">{moment(booking.date).format('h:mmA')} - Room {booking.roomId}</span>;
+                                })
+                                : ''
+                        }
+
                         <span className="number">{formattedDate}</span>
                         <span className="bg">{formattedDate}</span>
                     </div>
@@ -105,6 +137,14 @@ class Calendar extends React.Component {
         this.setState({
             currentMonth: dateFns.subMonths(this.state.currentMonth, 1)
         });
+    };
+
+    findBookingByDay = day => {
+        let result = _.filter(this.state.monthlyBookings, booking => {
+            return new Date(booking.date).getDate() === day;
+        });
+
+        return result;
     };
 
     render() {

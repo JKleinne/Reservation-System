@@ -32,44 +32,7 @@ async function getStudentById(studentId) {
     }
 }
 
-/**
-* Delete operation for booking
-*/
-async function deleteBookingById(bookingID){
-	const cmd = 'DELETE FROM Bookings WHERE bookingID = ${bookingID}';
-	
-	try {
-		return await db.query(cmd);
-	} catch(error) {
-		throw{
-			message: error.message
-		}
-	}
-}
-
-/**
-* Add operation for group
-*/
-async function addGroup(groupName, memberIDs){
-	const cmd = 'INSERT INTO Group(groupName, memberIDs)';
-	
-	try {
-		return await db.query(cmd);
-	} catch(error) {
-		throw{
-			message: error.message
-		}
-	}
-}
-
-
-//TODO returns user password based on username
-async function getStudentByUsername(username) {}
-
 module.exports = {
     addStudent,
-    getStudentById,
-    getStudentByUsername,
-    deleteBookingById,
-    addGroup
+    getStudentById
 };
