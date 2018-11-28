@@ -49,7 +49,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-//TODO Combine in one route: All analytics relted stuff ('/getAnalytics')
+//TODO Combine in one route: All analytics related stuff ('/getAnalytics')
 
 router.get('/getUser/:studentId', async (req, res) => {
     try {
@@ -79,6 +79,16 @@ router.get('/getCourseDemographics', async (req, res) => {
        console.error(error);
        res.status(400).send({ error: 'Unable to fetch demographics'});
    }
+});
+
+router.get('/getUsers', async (req, res) => {
+    try {
+        let users = await Student.getAllStudents();
+        res.status(200).send({ users });
+    } catch(error) {
+        console.error(error);
+        res.status(400).send({ error: 'Unabled to fetch users' });
+    }
 });
 
 module.exports = router;

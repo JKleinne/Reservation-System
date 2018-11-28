@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Calendar from './Calendar';
-import '../stylesheets/navigation.css'
-import Navigation from './Navigation';
+import '../../stylesheets/navigation.css'
+import Navigation from '../Navigation';
 
 class Dashboard extends Component {
     constructor(props) {

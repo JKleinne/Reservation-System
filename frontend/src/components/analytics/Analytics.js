@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Navigation from "./Navigation";
-import '../stylesheets/navigation.css';
+import Navigation from "../Navigation";
+import '../../stylesheets/navigation.css';
 import { Bar, Pie } from 'react-chartjs-2';
 import moment from 'moment';
 import axios from 'axios';
