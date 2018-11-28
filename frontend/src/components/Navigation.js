@@ -11,12 +11,13 @@ class Navigation extends Component {
         this.logoutClicked = () => this.setState({ redirectTo: '/' });
         this.dashboardClicked = () => this.setState({ redirectTo: '/dashboard' });
         this.analyticsClicked = () => this.setState({ redirectTo: '/analytics' });
+        this.usersClicked = () => this.setState({ redirectTo: '/users' });
     }
 
     render() {
         {console.log(JSON.stringify(this.props, null, 2))}
         if (this.state.redirectTo)
-            return <Redirect to={{pathname: this.state.redirectTo}}/>
+            return <Redirect to={{pathname: this.state.redirectTo}}/>;
 
         else {
             return (
@@ -40,6 +41,17 @@ class Navigation extends Component {
                                     <i className="fa fa-bar-chart-o fa-2x"></i>
                                     <span className="nav-text" onClick={this.analyticsClicked}>
                             Analytics
+                        </span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <ul>
+                            <li>
+                                <a>
+                                    <i className="fa fa-user fa-2x"></i>
+                                    <span className="nav-text" onClick={this.usersClicked}>
+                            Users
                         </span>
                                 </a>
                             </li>
