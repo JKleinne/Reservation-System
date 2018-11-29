@@ -74,9 +74,10 @@ main {
 
 .calendarContainer {
   overflow-y: scroll;
-  width: 45%;
+  width: 47%;
   max-width: 750px;
   position: absolute;
+  max-height: 95%;
   background-color: white;
   top: 50%;
   left: 50%;
