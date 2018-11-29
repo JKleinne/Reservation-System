@@ -160,6 +160,19 @@ class LoginRegister extends Component {
                       </div>
 
                       <div className="input" style={this.state.registerClicked ? visible : hidden}>
+                          <input type="text" style={this.state.registerClicked ? textWhite : {}}
+                                 placeholder="Email" name="email" id="email" onChange={evt => {
+                              this.setState({
+                                  ...this.state,
+                                  signup: {
+                                      ...this.state.signup,
+                                      email: evt.target.value
+                                  }
+                              });
+                          }}/>
+                      </div>
+
+                      <div className="input" style={this.state.registerClicked ? visible : hidden}>
                           <label style={{color: 'white'}}>Course: </label>
                           <select style={this.state.registerClicked ? {float: 'right'} : {}}
                                   name="course" id="course" onLoad={evt => {

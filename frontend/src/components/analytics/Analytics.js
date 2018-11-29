@@ -83,7 +83,8 @@ class Analytics extends Component {
                 <Navigation />
 
                 <div className="calendarContainer">
-                    <Bar data={{
+                    <div className="chart">
+                    <Bar className="chart" data={{
                         labels: this.state.labels,
                         datasets: [{
                             label: "Logins",
@@ -93,6 +94,10 @@ class Analytics extends Component {
                         }]
                     }}
                     options={{
+                        title: {
+                            display: true,
+                            text: 'Logins the past 7 days'
+                        },
                         scales: {
                             yAxes: [{
                                 display: true,
@@ -104,23 +109,26 @@ class Analytics extends Component {
                         }
                     }
                     }/>
+                    </div>
                     <div></div>
 
-                    <Pie data={{
+                    <div className="chart">
+                    <Pie className="chart" data={{
                         labels: this.state.demoLabels,
                         datasets: [{
                             label: "Course Demographics",
                             backgroundColor: this.state.demoColors,
                             borderColor: 'rgb(255, 99, 132)',
                             data: this.state.demoData
-                        }],
-                        options: {
-                            title: {
-                                display: true,
-                                text: 'Course Demographics'
-                            }
-                        }
-                    }}/>
+                        }]
+                    }} options={{
+                        title: {
+                            display: true,
+                            text: 'Course Demographics',
+                            position: 'top'
+                        }}
+                    }/>
+                    </div>
                 </div>
             </div>
         )
