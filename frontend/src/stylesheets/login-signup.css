@@ -394,6 +394,7 @@ html {
 .materialContainer {
     width: 100%;
     max-width: 460px;
+    max-height: 750px;
     position: absolute;
     top: 50%;
     left: 50%;
