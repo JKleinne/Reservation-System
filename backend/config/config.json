@@ -17,7 +17,7 @@
     "saltRounds": 10
   },
   "emailService": {
-    "user": "jonniequezada@gmail.com",
-    "pass": "725quezadaanne"
+    "user": "",
+    "pass": ""
   }
 }
