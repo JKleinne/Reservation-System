@@ -159,6 +159,19 @@
     background: rgba(255, 255, 255, 0.5);
 }
 
+.input .label {
+    position: absolute;
+    top: -50%;
+    left: 0;
+    z-index: 2;
+    cursor: pointer;
+    color: #ED2553;
+    line-height: 60px;
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
 .input label {
     position: absolute;
     top: 10px;
@@ -182,7 +195,7 @@
 
     font-weight: 900;
     font-size: 18px;
-    color: rgba(0, 0, 0, 0.2);
+    color: rgba(0, 0, 0, 0.7);
 }
 
 .button.login {
@@ -506,8 +519,26 @@ select {
     width: 220px;
     height: 60px;
     padding: 5px 10px;
+    float: right;
+}
+
+select.profile {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    font-size: 16px;
+    background: #ED2553;
+    color: white;
+    width: 220px;
+    height: 60px;
+    padding: 5px 10px;
+    float: right;
 }
 
 .analyticsContainer {
     background-color: white;
+}
+
+.profileButton {
+    width: 700px;
 }
