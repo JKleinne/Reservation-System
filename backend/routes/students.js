@@ -91,4 +91,23 @@ router.get('/getUsers', async (req, res) => {
     }
 });
 
+router.post('/updateStudent/:studentId', async (req, res) => {
+    try {
+        let user = req.body.user;
+        await Student.updateStudent(req.params.studentId, user.name, user.courseId);
+    } catch(error) {
+        console.error(error);
+        res.status(400).send({ error: 'Unable to update student' });
+    }
+});
+
+router.delete('/deleteStudent/:studentId', async (req, res) => {
+    try {
+        await Student.deleteStudent(req.params.studentId);
+    } catch(error) {
+        console.error(error);
+        res.status(400).send({ error: 'Unable to delete student' });
+    }
+});
+
 module.exports = router;

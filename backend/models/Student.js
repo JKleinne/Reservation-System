@@ -65,9 +65,39 @@ async function getAllStudents() {
     }
 }
 
+async function updateStudent(studentId, name, courseId) {
+    const cmd = `UPDATE Student 
+                 SET studentId = ${studentId},
+                     name = '${name}',
+                     courseId = ${courseId}
+                 WHERE studentId = ${studentId}`;
+
+    try {
+        await db.query(cmd);
+    } catch(error) {
+        throw {
+            message: error
+        }
+    }
+}
+
+async function deleteStudent(studentId) {
+    const cmd = `DELETE FROM Student WHERE studentId = ${studentId}`;
+
+    try {
+        await db.query(cmd);
+    } catch(error) {
+        throw {
+            message: error
+        }
+    }
+}
+
 module.exports = {
     addStudent,
     getStudentById,
     getStudentCountPerCourse,
-    getAllStudents
+    getAllStudents,
+    updateStudent,
+    deleteStudent
 };

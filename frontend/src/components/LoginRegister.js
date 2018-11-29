@@ -105,7 +105,7 @@ class LoginRegister extends Component {
       };
 
       if (this.state.redirectTo)
-          return <Redirect to={{pathname: this.state.redirectTo}}/>;
+          return <Redirect to={{ pathname: this.state.redirectTo }}/>;
       else {
           return (
               <div className="materialContainer">

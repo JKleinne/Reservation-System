@@ -15,7 +15,6 @@ class Navigation extends Component {
     }
 
     render() {
-        {console.log(JSON.stringify(this.props, null, 2))}
         if (this.state.redirectTo)
             return <Redirect to={{pathname: this.state.redirectTo}}/>;
 
