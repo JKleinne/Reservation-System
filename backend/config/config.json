@@ -1,0 +1,23 @@
+{
+  "mysql": {
+    "host": "localhost",
+    "user": "root",
+    "password": "password",
+    "database": "sys"
+  },
+  "cLimit": 10,
+  "PORT": "3005",
+  "www": {
+	"RADIX": 10,
+	"portType": "string",
+	"pipe": "Pipe",
+	"port": "Port"
+  },
+  "encryption": {
+    "saltRounds": 10
+  },
+  "emailService": {
+    "user": "",
+    "pass": ""
+  }
+}
