@@ -1,6 +1,6 @@
 import React from "react";
 import dateFns from "date-fns";
-import '../stylesheets/calendar.css';
+import '../../stylesheets/calendar.css';
 import axios from 'axios';
 import _ from 'lodash';
 import moment from 'moment';
@@ -15,12 +15,12 @@ class Calendar extends React.Component {
         };
     }
 
-    async componentWillMount() {
+    async componentDidMount() {
         const monthlyBookings = await axios.post(`/bookings/getBookingsByMonth/${moment(this.state.currentMonth).month() + 1}`);
         this.setState({ monthlyBookings: monthlyBookings.data.bookings });
     }
 
-    async componentWillUpdate() {
+    async componentDidUpdate() {
         const monthlyBookings = await axios.post(`/bookings/getBookingsByMonth/${moment(this.state.currentMonth).month() + 1}`);
         this.setState({ monthlyBookings: monthlyBookings.data.bookings });
     }
