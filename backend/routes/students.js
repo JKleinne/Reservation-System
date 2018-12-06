@@ -53,7 +53,6 @@ router.post('/login', async (req, res) => {
 });
 
 //TODO Combine in one route: All analytics related stuff ('/getAnalytics')
-
 router.get('/getUser/:studentId', async (req, res) => {
     try {
         let user = await Student.getStudentById(req.params.studentId);
