@@ -72,7 +72,7 @@ class Analytics extends Component {
         courses = courses.data.demographics;
 
         for(let i = 0; i < courses.length; i++)
-            colors.push(randomColor());
+            colors.push(randomColor({ luminosity: 'light' }));
 
         return colors;
     }

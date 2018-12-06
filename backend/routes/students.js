@@ -2,7 +2,6 @@ const router = require('express').Router();
 
 const bcrypt = require('bcrypt');
 const moment = require('moment');
-const nodemailer = require('nodemailer');
 
 const encrypt = require('../utilities/encryption');
 
@@ -10,14 +9,6 @@ const Login = require('../models/Login');
 const Student = require('../models/Student');
 
 const config = require('../config/config');
-
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: config.emailService.user,
-        pass: config.emailService.pass
-    }
-});
 
 /*
  * Routes
@@ -27,15 +18,6 @@ router.post('/signup', async (req, res) => {
     try {
         await Student.addStudent(req.body.id, hashedPW, req.body.fullName,
                                     req.body.courseId);
-
-        const mailOptions = {
-            from: config.emailService.user,
-            to: req.body.email,
-            subject: 'Vanier College Booking System Registration',
-            html: '<p>Congratulations you have been successfully registered!</p>'
-        };
-
-        await transporter.sendMail(mailOptions);
 
         res.status(200);
         res.send({user: await Student.getStudentById(req.body.id)});
@@ -125,6 +107,7 @@ router.post('/updateStudent/:studentId', async (req, res) => {
 router.delete('/deleteStudent/:studentId', async (req, res) => {
     try {
         await Student.deleteStudent(req.params.studentId);
+        res.status(200);
     } catch(error) {
         console.error(error);
         res.status(400).send({ error: 'Unable to delete student' });

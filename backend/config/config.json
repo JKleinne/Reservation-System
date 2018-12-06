@@ -15,9 +15,5 @@
   },
   "encryption": {
     "saltRounds": 10
-  },
-  "emailService": {
-    "user": "",
-    "pass": ""
   }
 }
