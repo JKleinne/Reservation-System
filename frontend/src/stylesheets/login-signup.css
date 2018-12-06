@@ -521,6 +521,7 @@ select {
     height: 60px;
     padding: 5px 10px;
     float: right;
+    box-sizing: border-box;
 }
 
 select.profile {

@@ -1,0 +1,32 @@
+CREATE TABLE `Logins` (
+  `_id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` datetime DEFAULT NULL,
+  `studentId` varchar(7) DEFAULT NULL,
+  PRIMARY KEY (`_id`)
+);
+
+CREATE TABLE `Booking` (
+  `_id` int(11) NOT NULL AUTO_INCREMENT,
+  `roomId` tinyint(1) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `members` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`_id`)
+);
+
+CREATE TABLE `Course` (
+  `courseId` int(11) NOT NULL,
+  `description` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`courseId`)
+);
+
+CREATE TABLE `Student` (
+  `_id` int(11) NOT NULL AUTO_INCREMENT,
+  `studentId` varchar(7) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `notes` varchar(200) DEFAULT NULL,
+  `courseId` int(11) DEFAULT NULL,
+  `permission` tinyint(2) DEFAULT NULL,
+  `password` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`_id`),
+  UNIQUE KEY `studentId_UNIQUE` (`studentId`)
+);
