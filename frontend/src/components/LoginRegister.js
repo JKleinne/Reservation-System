@@ -96,7 +96,9 @@ class LoginRegister extends Component {
     }
 
     toggleRegister() {
-        this.setState({registerClicked: !this.state.registerClicked})
+        this.setState({
+            registerClicked: !this.state.registerClicked
+        })
     }
 
   render() {
@@ -233,15 +235,15 @@ class LoginRegister extends Component {
                       </div>
 
                       <div className="button login">
+                          {  !this.state.registerClicked && this.state.errorLogin ?
+                              <p style={this.state.registerClicked ? {color: 'white'} : {color: '#ED2553'}}>
+                                  Incorrect Login
+                              </p> : ""
+                          }
                           <button className={""} onClick={async evt => {
                               await this.validateForm(evt)
                           }}>
                               <span className="btn" style={this.state.registerClicked ? textWhite : {}}>Go</span>
-                              {  this.state.errorLogin ?
-                                  <p style={this.state.registerClicked ? {color: 'white'} : {color: '#ED2553'}}>
-                                      Incorrect Login
-                                  </p> : ""
-                              }
                               <i className="fa fa-check"></i>
                           </button>
                       </div>
