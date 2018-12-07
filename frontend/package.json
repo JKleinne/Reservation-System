@@ -16,6 +16,8 @@
     "radium": "^0.25.0",
     "randomcolor": "^0.5.3",
     "react": "^16.4.2",
+    "react-alert": "^4.0.4",
+    "react-bootstrap": "^0.32.4",
     "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.4.2",
     "react-router-dom": "^4.3.1",

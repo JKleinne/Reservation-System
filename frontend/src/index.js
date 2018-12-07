@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
-//import './stylesheets/index.css';
-import registerServiceWorker from './registerServiceWorker';
+//import { Provider as AlertProvider } from 'react-alert';
+
+import './stylesheets/index.css';
 
 import LoginRegister from './components/LoginRegister';
 import Dashboard from './components/dashboard/Dashboard';
@@ -23,7 +24,6 @@ const routing = (
 );
 
 ReactDOM.render(routing, document.getElementById('root'));
-registerServiceWorker();
 
 /*
 Homer Simpson approves of this code

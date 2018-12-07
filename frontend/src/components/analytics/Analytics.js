@@ -6,6 +6,7 @@ import moment from 'moment';
 import axios from 'axios';
 import _ from 'lodash';
 import randomColor from 'randomcolor';
+import { Tabs, Tab } from 'react-bootstrap';
 
 class Analytics extends Component {
     constructor(props) {
@@ -83,52 +84,54 @@ class Analytics extends Component {
                 <Navigation />
 
                 <div className="calendarContainer">
-                    <div className="chart">
-                    <Bar className="chart" data={{
-                        labels: this.state.labels,
-                        datasets: [{
-                            label: "Logins",
-                            backgroundColor: 'rgb(255, 99, 132)',
-                            borderColor: 'rgb(255, 99, 132)',
-                            data: this.state.data,
-                        }]
-                    }}
-                    options={{
-                        title: {
-                            display: true,
-                            text: 'Logins the past 7 days'
-                        },
-                        scales: {
-                            yAxes: [{
-                                display: true,
-                                ticks: {
-                                    beginAtZero: true,
-                                    stepSize: 1
-                                }
+                <Tabs defaultKey={1}>
+                    <Tab eventKey={1} title="Logins">
+                        <Bar className="chart" data={{
+                            labels: this.state.labels,
+                            datasets: [{
+                                label: "Logins",
+                                backgroundColor: 'rgb(255, 99, 132)',
+                                borderColor: 'rgb(255, 99, 132)',
+                                data: this.state.data,
                             }]
-                        }
-                    }
-                    }/>
-                    </div>
-                    <div></div>
-
-                    <div className="chart">
-                    <Pie className="chart" data={{
-                        labels: this.state.demoLabels,
-                        datasets: [{
-                            label: "Course Demographics",
-                            backgroundColor: this.state.demoColors,
-                            borderColor: 'rgb(255, 99, 132)',
-                            data: this.state.demoData
-                        }]
-                    }} options={{
-                        title: {
-                            display: true,
-                            text: 'Course Demographics',
-                            position: 'top'
                         }}
-                    }/>
-                    </div>
+                             options={{
+                                 title: {
+                                     display: true,
+                                     text: 'Logins the past 7 days'
+                                 },
+                                 scales: {
+                                     yAxes: [{
+                                         display: true,
+                                         ticks: {
+                                             beginAtZero: true,
+                                             stepSize: 1
+                                         }
+                                     }]
+                                 }
+                             }
+                             }/>
+                    </Tab>
+
+                    <Tab eventKey={2} title="Demographics">
+                            <Pie className="chart" data={{
+                                labels: this.state.demoLabels,
+                                datasets: [{
+                                    label: "Course Demographics",
+                                    backgroundColor: this.state.demoColors,
+                                    borderColor: 'rgb(255, 99, 132)',
+                                    data: this.state.demoData
+                                }]
+                            }} options={{
+                                title: {
+                                    display: true,
+                                    text: 'Course Demographics',
+                                    position: 'top'
+                                }}
+                            }/>
+                    </Tab>
+                </Tabs>
+                    
                 </div>
             </div>
         )
