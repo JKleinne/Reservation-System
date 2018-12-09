@@ -8,25 +8,6 @@ const encrypt = require('../utilities/encryption');
 const bcrypt = require("bcrypt");
 const Login = require("../models/Login");
 
-router.post('/twofactor/setup', function(req, res){
-    const secret = speakeasy.generateSecret({length: 10});
-    QRCode.toDataURL(secret.otpauth_url, (err, data_url)=>{
-        //save to logged in user.
-        user.twofactor = {
-            secret: "",
-            tempSecret: secret.base32,
-            dataURL: data_url,
-            otpURL: secret.otpauth_url
-        };
-        return res.json({
-            message: 'Verify OTP',
-            tempSecret: secret.base32,
-            dataURL: data_url,
-            otpURL: secret.otpauth_url
-        });
-    });
-});
-
 router.post('/twofactor/verify/:adminId/:token', async (req, res) => {
     const admin = await Admin.getAdmin(req.params.adminId);
 
