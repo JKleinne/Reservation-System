@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import '../stylesheets/login-signup.css';
+import '../../stylesheets/login-signup.css';
 import { Style } from 'radium';
 import _ from 'lodash';
 
@@ -20,7 +20,7 @@ const visible = {
 const hidden = {
     display: 'none'
 };
-//TODO Populate Selection List
+
 class LoginRegister extends Component {
     constructor(props) {
         super(props);
@@ -40,6 +40,9 @@ class LoginRegister extends Component {
                 confirmPasswordValid: true
             }
         }
+
+        this.idRef = React.createRef();
+        this.pwRef = React.createRef();
     }
 
     async validateForm(evt) {
@@ -59,7 +62,7 @@ class LoginRegister extends Component {
                 let response;
 
                 try {
-                    response = await axios.post("/users/login", {...this.state.login});
+                    response = await axios.post("/admins/login", {...this.state.login});
                 } catch(error) {
                     response = error.response;
                 }
@@ -79,7 +82,7 @@ class LoginRegister extends Component {
                 }
 
                 if(response && response.status === 200)
-                    this.setState({ redirectTo: '/dashboard' });
+                    this.setState({redirectTo: '/signupSuccess'});
                 else
                     this.setState({ ...this.state, errorLogin: response.data.error });
             }
@@ -96,6 +99,9 @@ class LoginRegister extends Component {
     }
 
     toggleRegister() {
+        this.idRef.current.value = '';
+        this.pwRef.current.value = '';
+
         this.setState({
             registerClicked: !this.state.registerClicked
         })
@@ -107,7 +113,7 @@ class LoginRegister extends Component {
       };
 
       if (this.state.redirectTo)
-          return <Redirect to={{ pathname: this.state.redirectTo }}/>;
+          return <Redirect push to={{ pathname: this.state.redirectTo }}/>;
       else {
           return (
               <div className="materialContainer">
@@ -127,7 +133,8 @@ class LoginRegister extends Component {
                       </div>
 
                       <div className="input">
-                          <input type="text" style={this.state.registerClicked ? textWhite : {}}
+                          <input type="text" maxLength="7" ref={this.idRef}
+                                 style={this.state.registerClicked ? textWhite : {}}
                                  placeholder="Student Id" name="studentId" id="studentId" onChange={evt => {
                               if (this.state.registerClicked)
                                   this.setState({
@@ -184,15 +191,22 @@ class LoginRegister extends Component {
                               });
                           }}>
                               <option value="0">Computer Science Technology</option>
-                              <option value="1">Computer Science And Mathematics</option>
-                              <option value="2">Social Science</option>
-                              <option value="3">Pure and Applied Science</option>
-                              <option value="4">Commerce</option>
+                              <option value="1">Social Science</option>
+                              <option value="2">Commerce</option>
+                              <option value="3">Industrial Electronics</option>
+                              <option value="4">Liberal Arts</option>
+                              <option value="5">Communications</option>
+                              <option value="6">Business Administration</option>
+                              <option value="7">Early Childhood education</option>
+                              <option value="8">Nursing</option>
+                              <option value="9">Music</option>
+                              <option value="10">Science</option>
                           </select>
                       </div>
 
                       <div className="input">
                           <input type="password" style={this.state.registerClicked ? textWhite : {}}
+                                 ref={this.pwRef}
                                  placeholder="Password" name="password" id="pass" onChange={evt => {
                               if (this.state.registerClicked)
                                   this.setState({

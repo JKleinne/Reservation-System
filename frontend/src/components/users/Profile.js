@@ -6,7 +6,7 @@ import '../../stylesheets/profile-buttons.css';
 import axios from 'axios';
 import { Redirect } from "react-router-dom";
 
-class UsersTable extends Component {
+class Profile extends Component {
     constructor(props) {
         super(props);
 
@@ -14,6 +14,7 @@ class UsersTable extends Component {
             changes: {}
         };
 
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     async componentDidMount() {
@@ -21,10 +22,22 @@ class UsersTable extends Component {
         this.setState({ user: user.data.user });
     }
 
+    async handleDelete() {
+        const adminId = prompt("Enter your id: ");
+        const userKey = prompt("Enter your 2fa key: ");
+
+        const response = await axios.post(`/admins/twofactor/verify/${adminId}/${userKey}`);
+        const verified = response.data.verified;
+
+        if(verified) {
+            this.setState({...this.state, redirectTo: '/users'});
+            await axios.delete(`/users/deleteStudent/${this.state.user.studentId}`);
+        }
+    }
+
     render() {
-        {console.log(`State: ${JSON.stringify(this.state, null, 2)}`)}
         if (this.state.redirectTo)
-            return <Redirect to={{pathname: this.state.redirectTo}}/>;
+            return <Redirect push to={{pathname: this.state.redirectTo}}/>;
 
         else {
             return (
@@ -36,7 +49,7 @@ class UsersTable extends Component {
 
                             <div className="input">
                                 <label className="label">Student Id</label>
-                                <input type="text"
+                                <input type="text" maxLength="7"
                                        name="studentId" id="studentId"
                                        placeholder={this.state.user ? this.state.user.studentId : ''}
                                        onChange={evt => {
@@ -97,6 +110,24 @@ class UsersTable extends Component {
                                     <option value="4" selected={this.state. user && this.state.user.courseId == "4" ? 'selected' : ''}>
                                         Commerce
                                     </option>
+                                    <option value="5" selected={this.state. user && this.state.user.courseId == "5" ? 'selected' : ''}>
+                                        Communications
+                                    </option>
+                                    <option value="6" selected={this.state. user && this.state.user.courseId == "6" ? 'selected' : ''}>
+                                        Business Administration
+                                    </option>
+                                    <option value="7" selected={this.state. user && this.state.user.courseId == "7" ? 'selected' : ''}>
+                                        Early Childhood education
+                                    </option>
+                                    <option value="8" selected={this.state. user && this.state.user.courseId == "8" ? 'selected' : ''}>
+                                        Nursing
+                                    </option>
+                                    <option value="9" selected={this.state. user && this.state.user.courseId == "9" ? 'selected' : ''}>
+                                        Music
+                                    </option>
+                                    <option value="10" selected={this.state. user && this.state.user.courseId == "10" ? 'selected' : ''}>
+                                        Science
+                                    </option>
                                 </select>
                             </div>
 
@@ -107,10 +138,7 @@ class UsersTable extends Component {
                                 }}>Save Changes</a>
                             </div>
                             <div>
-                                <a className="bttn-dark" onClick={async () => {
-                                    this.setState({...this.state, redirectTo: '/users'});
-                                    await axios.delete(`/users/deleteStudent/${this.state.user.studentId}`);
-                                }}>Delete User</a>
+                                <a className="bttn-dark" onClick={this.handleDelete}>Delete User</a>
                             </div>
 
                         </div>
@@ -121,4 +149,4 @@ class UsersTable extends Component {
     }
 }
 
-export default UsersTable;
+export default Profile;

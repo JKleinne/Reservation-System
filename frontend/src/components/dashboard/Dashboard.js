@@ -22,7 +22,6 @@ class Dashboard extends Component {
                 <div>
                     <Navigation studentId={this.props.match.params.studentId}/>
                     <div className="calendarContainer">
-                        <a className="bttn-dark " onClick={() => window.print()}>Print</a>
                         {
                             this.state && this.state.bookings &&
                             <Calendar bookings={this.state.bookings} />

@@ -6,7 +6,6 @@ import moment from 'moment';
 import axios from 'axios';
 import _ from 'lodash';
 import randomColor from 'randomcolor';
-import { Tabs, Tab } from 'react-bootstrap';
 
 class Analytics extends Component {
     constructor(props) {
@@ -84,8 +83,7 @@ class Analytics extends Component {
                 <Navigation />
 
                 <div className="calendarContainer">
-                <Tabs defaultKey={1}>
-                    <Tab eventKey={1} title="Logins">
+                    <div className="chart">
                         <Bar className="chart" data={{
                             labels: this.state.labels,
                             datasets: [{
@@ -111,27 +109,26 @@ class Analytics extends Component {
                                  }
                              }
                              }/>
-                    </Tab>
+                    </div>
+                    <div></div>
 
-                    <Tab eventKey={2} title="Demographics">
-                            <Pie className="chart" data={{
-                                labels: this.state.demoLabels,
-                                datasets: [{
-                                    label: "Course Demographics",
-                                    backgroundColor: this.state.demoColors,
-                                    borderColor: 'rgb(255, 99, 132)',
-                                    data: this.state.demoData
-                                }]
-                            }} options={{
-                                title: {
-                                    display: true,
-                                    text: 'Course Demographics',
-                                    position: 'top'
-                                }}
-                            }/>
-                    </Tab>
-                </Tabs>
-                    
+                    <div className="chart">
+                        <Pie className="chart" data={{
+                            labels: this.state.demoLabels,
+                            datasets: [{
+                                label: "Course Demographics",
+                                backgroundColor: this.state.demoColors,
+                                borderColor: 'rgb(255, 99, 132)',
+                                data: this.state.demoData
+                            }]
+                        }} options={{
+                            title: {
+                                display: true,
+                                text: 'Course Demographics',
+                                position: 'top'
+                            }}
+                        }/>
+                    </div>
                 </div>
             </div>
         )

@@ -12,6 +12,7 @@ class Navigation extends Component {
         this.dashboardClicked = () => this.setState({ redirectTo: '/dashboard' });
         this.analyticsClicked = () => this.setState({ redirectTo: '/analytics' });
         this.usersClicked = () => this.setState({ redirectTo: '/users' });
+        this.adminsClicked = () => this.setState({ redirectTo: '/admins' });
     }
 
     render() {
@@ -51,6 +52,17 @@ class Navigation extends Component {
                                     <i className="fa fa-user fa-2x"></i>
                                     <span className="nav-text" onClick={this.usersClicked}>
                             Users
+                        </span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <ul>
+                            <li>
+                                <a>
+                                    <i className="fa fa-user-md fa-2x"></i>
+                                    <span className="nav-text" onClick={this.adminsClicked}>
+                            Admins
                         </span>
                                 </a>
                             </li>

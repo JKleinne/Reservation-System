@@ -2,10 +2,9 @@ const createError = require('http-errors');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const passport = require('passport');
 const session = require('express-session');
 const flash = require('flash');
-
+const bodyParser = require('body-parser');
 const app = express();
 
 // Express Session
@@ -15,14 +14,14 @@ app.use(session({
     resave: false
 }));
 
-// Passport init
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // Connect Flash
 app.use(flash());

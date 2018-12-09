@@ -30,3 +30,11 @@ CREATE TABLE `Student` (
   PRIMARY KEY (`_id`),
   UNIQUE KEY `studentId_UNIQUE` (`studentId`)
 );
+
+CREATE TABLE `Admins` (
+  `id` varchar(7) NOT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  `password` varchar(60) DEFAULT NULL,
+  `twoFAsecret` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);

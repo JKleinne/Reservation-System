@@ -27,31 +27,6 @@ router.post('/signup', async (req, res) => {
     }
 });
 
-router.post('/login', async (req, res) => {
-    let studentId = req.body.id;
-    let password = req.body.password;
-
-    let user = await Student.getStudentById(studentId);
-
-    if(!user) {
-        res.status(401).send({error: "User not found"});
-    }
-
-    let isValid = await bcrypt.compare(password, user.password);
-
-    if(!isValid) {
-        res.status(401).send({error: "Incorrect password"});
-    }
-    else {
-        await Login.addLogin(moment().format('YYYY-MM-DD hh:mm:ss'), studentId);
-
-        res.status(200).send({
-            user,
-            isLogged: true
-        });
-    }
-});
-
 //TODO Combine in one route: All analytics related stuff ('/getAnalytics')
 router.get('/getUser/:studentId', async (req, res) => {
     try {
