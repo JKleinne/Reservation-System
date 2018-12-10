@@ -25,7 +25,7 @@ class UsersTable extends Component {
         this.setState({ users: users.data.users });
     }
 
-    async componentDidUpdate(prevProps, prevState, snapshot) {
+    async componentWillUpdate(prevProps, prevState, snapshot) {
         const users = await axios.get('/users/getUsers');
         this.setState({users: users.data.users});
     }
