@@ -8,31 +8,28 @@ import { Redirect } from "react-router-dom";
 import { CSVLink } from "react-csv";
 import print from 'print-js'
 
-let _this;
 class UsersTable extends Component {
     constructor(props) {
         super(props);
 
-        _this = this;
-
         this.state = {};
 
-        this.handleTableDownloadClick.bind(this);
+        this.handleTableDownloadClick = this.handleTableDownloadClick.bind(this);
     }
 
     async componentDidMount() {
         const users = await axios.get('/users/getUsers');
-        this.setState({ users: users.data.users });
+        this.setState({users: _.sortBy(users.data.users, 'studentId')});
     }
 
     async componentWillUpdate(prevProps, prevState, snapshot) {
         const users = await axios.get('/users/getUsers');
-        this.setState({users: users.data.users});
+        this.setState({users: _.sortBy(users.data.users, 'studentId')});
     }
 
     handleTableDownloadClick() {
         print({
-            printable: _this.state.users,
+            printable: this.state.users,
             type: 'json',
             properties: ['studentId', 'name', 'description']
         });

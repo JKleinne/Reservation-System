@@ -206,3 +206,48 @@ INSERT INTO sys.Booking (roomId, date)
 VALUES (3, '2018-12-06 12:00:19');
 INSERT INTO sys.Booking (roomId, date)
 VALUES (3, '2018-12-06 14:30:19');
+
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-06 00:46:02');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-05 07:42:37');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-10 05:49:47');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-09 03:16:15');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-06 20:56:23');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-06 10:38:39');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-07 22:15:04');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-10 18:41:40');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-05 15:42:46');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-05 01:56:21');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-10 04:55:35');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-07 05:26:40');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-06 07:02:41');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-09 08:08:51');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-06 04:51:04');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-04 06:54:01');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-08 20:21:25');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-07 08:44:41');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-06 07:40:00');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-06 11:21:23');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-08 10:47:49');
+INSERT INTO sys.Logins (date)
+VALUES ('2018-12-06 09:33:33');
