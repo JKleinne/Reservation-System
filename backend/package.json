@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "bcrypt": "^3.0.0",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.18.3",
     "connect-redis": "^3.3.3",
     "cookie-parser": "~1.4.3",
